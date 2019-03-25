@@ -1,0 +1,41 @@
+-- Question 1 - Answer
+select 
+	users.first_name
+    , users.last_name
+    , count(*) 
+from 
+	user_items items
+left join users on users.id = items.user_id
+group by user_id
+;
+
+-- Question 2 - Answer
+select * 
+from users 
+where id not in (
+select distinct(user_id) from user_items
+)
+;
+
+-- Question 3 - Answer
+select 
+	counts.description
+    , counts.num_purchased
+    , counts.num_purchased * counts.cost_pennies
+from (
+select 
+	count(*) as num_purchased
+	, description
+    , cost_pennies
+from user_items
+join items on user_items.item_id = items.id
+group by description
+) as counts
+;
+
+***************** SCRIPTING ****************************
+-- Question 1 - Answer
+cat data.dat | cut --delimiter=' ' -f3,8 --output-delimiter=' -> '
+
+-- Question 2 - Answer
+cat data.dat | cut --delimiter=' ' -f5 | sort | uniq -c | sort -r | awk '{x = $1; $1 = $2; $2 = ","; $3 = x; print; }' | tr -d ' '
