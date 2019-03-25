@@ -39,3 +39,10 @@ cat data.dat | cut --delimiter=' ' -f3,8 --output-delimiter=' -> '
 
 -- Question 2 - Answer
 cat data.dat | cut --delimiter=' ' -f5 | sort | uniq -c | sort -r | awk '{x = $1; $1 = $2; $2 = ","; $3 = x; print; }' | tr -d ' '
+
+************** Programming ****************************
+-- Question 1 - Answer
+https://github.com/vildapavlicek/DiceRoller
+
+-- Question 2 - Answer
+To make 1 million requests, I'd make for loop to generate requests and put them to chan where n go routines would take them, make the call, parse data and then put results to another chan where another func would take them and store data to DB. I think that sorting data in DB and doing counts would be faster than doing it in memory.

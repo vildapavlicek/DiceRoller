@@ -59,8 +59,7 @@ func TestGetResponse(t *testing.T) {
 			genURI: server.URL,
 		}
 
-		response, err := randomRoller.GetResponse("GET", nil)
-		defer response.Body.Close()
+		_, err := randomRoller.GetResponse("GET", nil)
 
 		assertErroNotNil(t, err)
 
